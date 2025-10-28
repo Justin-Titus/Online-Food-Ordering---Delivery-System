@@ -1,0 +1,3 @@
+com\foodordering\controller\MenuControllerIntegrationTest.class
+com\foodordering\controller\OrderControllerIntegrationTest.class
+com\foodordering\config\DataLoaderTest.class

@@ -1,0 +1,11 @@
+# Root gitignore for project
+
+# Ignore editor and IDE settings
+.vscode/
+
+# Ignore .kiro (tooling or local config)
+.kiro
+
+# Node / frontend build artifacts (keep existing frontend ignores separate)
+frontend/node_modules/
+frontend/dist/
