@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import './MenuManagement.css';
+import { getStockImage } from '../../assets/stockImages';
+
+const formatPrice = (value) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(Number(value) || 0);
 
 const API_BASE_URL = 'http://localhost:8080/api';
 
@@ -14,7 +17,8 @@ const MenuManagement = () => {
     description: '',
     price: '',
     category: '',
-    available: true
+    available: true,
+    imageUrl: ''
   });
 
   const categories = ['Pizza', 'Burgers', 'Drinks', 'Appetizers', 'Desserts'];
@@ -69,7 +73,8 @@ const MenuManagement = () => {
         },
         body: JSON.stringify({
           ...formData,
-          price: parseFloat(formData.price)
+          price: parseFloat(formData.price),
+          imageUrl: formData.imageUrl || null
         }),
       });
 
@@ -93,7 +98,8 @@ const MenuManagement = () => {
       description: item.description,
       price: item.price.toString(),
       category: item.category,
-      available: item.available
+      available: item.available,
+      imageUrl: item.imageUrl || ''
     });
     setShowAddForm(true);
   };
@@ -144,7 +150,8 @@ const MenuManagement = () => {
       description: '',
       price: '',
       category: '',
-      available: true
+      available: true,
+      imageUrl: ''
     });
     setEditingItem(null);
     setShowAddForm(false);
@@ -205,7 +212,7 @@ const MenuManagement = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="price">Price ($):</label>
+                <label htmlFor="price">Price (₹):</label>
                 <input
                   type="number"
                   id="price"
@@ -236,6 +243,18 @@ const MenuManagement = () => {
                 </select>
               </div>
 
+              <div className="form-group">
+                <label htmlFor="imageUrl">Image URL (optional):</label>
+                <input
+                  type="text"
+                  id="imageUrl"
+                  name="imageUrl"
+                  value={formData.imageUrl}
+                  onChange={handleInputChange}
+                  placeholder="https://example.com/image.jpg"
+                />
+              </div>
+
               <div className="form-group checkbox-group">
                 <label>
                   <input
@@ -264,9 +283,26 @@ const MenuManagement = () => {
       <div className="menu-items-grid">
         {menuItems.map(item => (
           <div key={item.id} className={`menu-item-card ${!item.available ? 'unavailable' : ''}`}>
-            <div className="item-header">
+              <div className="item-image">
+              <img
+                src={item.imageUrl ? item.imageUrl : getStockImage(item)}
+                alt={item.name}
+                onError={(e) => {
+                  try {
+                    const img = e.currentTarget;
+                    if (img.dataset.fallbackTried) return;
+                    img.dataset.fallbackTried = 'true';
+                    const fallback = getStockImage(item);
+                    if (img.src !== fallback) img.src = fallback;
+                  } catch {
+                    // ignore
+                  }
+                }}
+              />
+            </div>
+              <div className="item-header">
               <h3>{item.name}</h3>
-              <span className="price">${item.price.toFixed(2)}</span>
+              <span className="price">{formatPrice(item.price)}</span>
             </div>
             
             <p className="description">{item.description}</p>

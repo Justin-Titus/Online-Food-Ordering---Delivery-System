@@ -2,11 +2,17 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
 import './Cart.css';
 
+const formatPrice = (value) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(Number(value) || 0);
+
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity } = useCart();
   const navigate = useNavigate();
 
-  if (cart.items.length === 0) {
+  const handleCheckout = () => {
+    navigate('/checkout');
+  };
+
+  if (!cart || cart.items.length === 0) {
     return (
       <div className="cart-empty">
         <p>Your cart is empty</p>
@@ -14,10 +20,6 @@ const Cart = () => {
       </div>
     );
   }
-
-  const handleCheckout = () => {
-    navigate('/checkout');
-  };
 
   return (
     <div className="cart">
@@ -27,14 +29,20 @@ const Cart = () => {
           <div key={item.id} className="cart-item">
             <div className="item-info">
               <h4>{item.name}</h4>
-              <p className="item-price">${item.price.toFixed(2)} each</p>
+              <p className="item-price">{formatPrice(item.price)} each</p>
             </div>
             <div className="item-controls">
               <div className="quantity-controls">
                 <button 
-                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                  onClick={() => {
+                    if (item.quantity > 1) {
+                      updateQuantity(item.id, item.quantity - 1);
+                    } else {
+                      // if quantity is 1, treat minus as remove
+                      removeFromCart(item.id);
+                    }
+                  }}
                   className="quantity-btn"
-                  disabled={item.quantity <= 1}
                 >
                   -
                 </button>
@@ -46,24 +54,15 @@ const Cart = () => {
                   +
                 </button>
               </div>
-              <button 
-                onClick={() => removeFromCart(item.id)}
-                className="remove-btn"
-                title="Remove from cart"
-              >
-                ×
-              </button>
             </div>
-            <div className="item-total">
-              ${(item.price * item.quantity).toFixed(2)}
-            </div>
+            <div className="item-total">{formatPrice(item.price * item.quantity)}</div>
           </div>
         ))}
       </div>
       
       <div className="cart-summary">
         <div className="cart-total">
-          <strong>Total: ${cart.totalAmount.toFixed(2)}</strong>
+          <strong>Total: {formatPrice(cart.totalAmount)}</strong>
         </div>
         <button 
           onClick={handleCheckout}

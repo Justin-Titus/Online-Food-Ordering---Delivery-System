@@ -3,6 +3,8 @@ import { useAuth } from '../../hooks/useAuth';
 import { useCart } from '../../contexts/CartContext';
 import './Header.css';
 
+const formatPrice = (value) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(Number(value) || 0);
+
 const Header = () => {
   const { user, logout, isAuthenticated } = useAuth();
   const { cart } = useCart();
@@ -34,13 +36,13 @@ const Header = () => {
             {isAuthenticated && user.role === 'ADMIN' && (
               <li><Link to="/admin" className="nav-link admin-link">Admin</Link></li>
             )}
-            <li className="cart-indicator">
+                <li className="cart-indicator">
               <button 
                 onClick={handleCartClick}
                 className={`cart-button ${cart.items.length > 0 ? 'has-items' : ''}`}
                 disabled={cart.items.length === 0}
               >
-                🛒 Cart ({cart.items.length}) - ${cart.totalAmount.toFixed(2)}
+                    🛒 Cart ({cart.items.length}) - {formatPrice(cart.totalAmount)}
               </button>
             </li>
             {isAuthenticated ? (

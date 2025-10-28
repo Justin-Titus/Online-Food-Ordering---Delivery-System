@@ -8,6 +8,15 @@
   color: #2c3e50;
   background-color: #ffffff;
 
+  /* Theme colors (formal, consistent) */
+  --primary: #1f4e79; /* deep navy */
+  --primary-dark: #153a5a;
+  --accent: #f59e0b; /* warm accent */
+  --danger: #e74c3c; /* preserved for destructive actions */
+  --danger-dark: #c0392b;
+  --muted: #6b7280;
+  --bg-soft: #f6f7f8;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -66,14 +75,14 @@ button {
   font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
-  background-color: #3498db;
+  background-color: var(--primary);
   color: white;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 button:hover {
-  background-color: #2980b9;
+  background-color: var(--primary-dark);
 }
 
 button:focus,
@@ -93,5 +102,5 @@ input, textarea, select {
 
 input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: #3498db;
+  border-color: var(--primary);
 }

@@ -21,7 +21,7 @@
 .order-summary-section h2 {
   margin-bottom: 1.5rem;
   color: #333;
-  border-bottom: 2px solid #e74c3c;
+  border-bottom: 2px solid var(--primary);
   padding-bottom: 0.5rem;
 }
 
@@ -63,8 +63,8 @@
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #e74c3c;
-  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(31,78,121,0.12);
 }
 
 .form-actions {
@@ -88,12 +88,12 @@
 }
 
 .btn-primary {
-  background-color: #e74c3c;
+  background-color: var(--primary);
   color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: #c0392b;
+  background-color: var(--primary-dark);
   transform: translateY(-2px);
 }
 
@@ -154,7 +154,7 @@
 
 .item-price {
   font-weight: 600;
-  color: #e74c3c;
+  color: var(--primary);
 }
 
 .order-totals {
@@ -172,7 +172,7 @@
 .final-total {
   font-weight: 700;
   font-size: 1.1rem;
-  color: #e74c3c;
+  color: var(--primary);
   border-top: 1px solid #ddd;
   padding-top: 0.5rem;
   margin-top: 0.5rem;

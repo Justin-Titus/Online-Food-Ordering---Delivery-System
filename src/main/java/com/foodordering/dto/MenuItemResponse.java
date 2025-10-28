@@ -11,6 +11,7 @@ public class MenuItemResponse {
     private BigDecimal price;
     private String category;
     private Boolean available;
+    private String imageUrl;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     
@@ -23,6 +24,7 @@ public class MenuItemResponse {
         this.price = menuItem.getPrice();
         this.category = menuItem.getCategory();
         this.available = menuItem.getAvailable();
+        this.imageUrl = menuItem.getImageUrl();
         this.createdAt = menuItem.getCreatedAt();
         this.updatedAt = menuItem.getUpdatedAt();
     }
@@ -66,6 +68,14 @@ public class MenuItemResponse {
     
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
     
     public LocalDateTime getCreatedAt() {

@@ -18,6 +18,7 @@ public class MenuItemRequest {
     private String category;
     
     private Boolean available = true;
+    private String imageUrl;
     
     // Constructors
     public MenuItemRequest() {}
@@ -27,6 +28,14 @@ public class MenuItemRequest {
         this.price = price;
         this.category = category;
         this.available = available;
+    }
+
+    public MenuItemRequest(String name, BigDecimal price, String category, Boolean available, String imageUrl) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.available = available;
+        this.imageUrl = imageUrl;
     }
     
     // Getters and Setters
@@ -60,5 +69,13 @@ public class MenuItemRequest {
     
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

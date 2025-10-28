@@ -63,7 +63,7 @@
 }
 
 .access-denied h2 {
-  color: #e74c3c;
+  color: var(--danger);
   margin-bottom: 1rem;
 }
 

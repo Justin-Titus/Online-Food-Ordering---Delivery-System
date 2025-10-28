@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import './OrderManagement.css';
 
+const formatPrice = (value) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(Number(value) || 0);
+
 const API_BASE_URL = 'http://localhost:8080/api';
 
 const OrderManagement = () => {
@@ -24,7 +26,7 @@ const OrderManagement = () => {
     PREPARING: '#9b59b6',
     OUT_FOR_DELIVERY: '#e67e22',
     DELIVERED: '#27ae60',
-    CANCELLED: '#e74c3c'
+    CANCELLED: 'var(--danger)'
   };
 
   useEffect(() => {
@@ -142,7 +144,7 @@ const OrderManagement = () => {
               </div>
               
               <div className="order-card-details">
-                <p className="order-total">${order.totalAmount.toFixed(2)}</p>
+                <p className="order-total">{formatPrice(order.totalAmount)}</p>
                 <p className="order-date">{formatDate(order.createdAt)}</p>
                 <p className="order-items">{order.items.length} items</p>
               </div>
@@ -173,7 +175,7 @@ const OrderManagement = () => {
                     {formatStatus(selectedOrder.status)}
                   </span>
                 </p>
-                <p><strong>Total:</strong> ${selectedOrder.totalAmount.toFixed(2)}</p>
+                <p><strong>Total:</strong> {formatPrice(selectedOrder.totalAmount)}</p>
                 <p><strong>Created:</strong> {formatDate(selectedOrder.createdAt)}</p>
                 <p><strong>Contact:</strong> {selectedOrder.contactPhone}</p>
               </div>
@@ -193,7 +195,7 @@ const OrderManagement = () => {
                     <div key={index} className="order-item">
                       <span className="item-name">{item.menuItemName}</span>
                       <span className="item-quantity">x{item.quantity}</span>
-                      <span className="item-price">${(item.unitPrice * item.quantity).toFixed(2)}</span>
+                      <span className="item-price">{formatPrice(item.unitPrice * item.quantity)}</span>
                     </div>
                   ))}
                 </div>

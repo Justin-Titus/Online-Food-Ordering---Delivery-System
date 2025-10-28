@@ -59,12 +59,16 @@ public class MenuService {
      * Create a new menu item
      */
     public MenuItemResponse createMenuItem(MenuItemRequest request) {
-        MenuItem menuItem = new MenuItem(
-                request.getName(),
-                request.getPrice(),
-                request.getCategory(),
-                request.getAvailable()
-        );
+    MenuItem menuItem = new MenuItem(
+        request.getName(),
+        request.getPrice(),
+        request.getCategory(),
+        request.getAvailable()
+    );
+    // set optional image URL if provided
+    if (request.getImageUrl() != null && !request.getImageUrl().isEmpty()) {
+        menuItem.setImageUrl(request.getImageUrl());
+    }
         
         MenuItem savedMenuItem = menuItemRepository.save(menuItem);
         return new MenuItemResponse(savedMenuItem);
@@ -80,6 +84,8 @@ public class MenuService {
                     menuItem.setPrice(request.getPrice());
                     menuItem.setCategory(request.getCategory());
                     menuItem.setAvailable(request.getAvailable());
+                    // update image URL (can be null to clear)
+                    menuItem.setImageUrl(request.getImageUrl());
                     
                     MenuItem updatedMenuItem = menuItemRepository.save(menuItem);
                     return new MenuItemResponse(updatedMenuItem);

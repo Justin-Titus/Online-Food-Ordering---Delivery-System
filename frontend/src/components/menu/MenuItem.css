@@ -66,11 +66,11 @@
 .menu-item-price {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #e74c3c;
+  color: var(--primary);
 }
 
 .add-button {
-  background-color: #3498db;
+  background-color: var(--primary);
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -81,7 +81,7 @@
 }
 
 .add-button:hover:not(.disabled) {
-  background-color: #2980b9;
+  background-color: var(--primary-dark);
 }
 
 .add-button.disabled {
@@ -96,7 +96,7 @@
 }
 
 .quantity-btn {
-  background-color: #3498db;
+  background-color: var(--primary);
   color: white;
   border: none;
   width: 32px;
@@ -111,7 +111,7 @@
 }
 
 .quantity-btn:hover {
-  background-color: #2980b9;
+  background-color: var(--primary-dark);
 }
 
 .quantity {

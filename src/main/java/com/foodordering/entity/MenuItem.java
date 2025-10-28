@@ -30,6 +30,9 @@ public class MenuItem {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     
+    @Column(name = "image_url")
+    private String imageUrl;
+    
     // Constructors
     public MenuItem() {}
     
@@ -38,6 +41,16 @@ public class MenuItem {
         this.price = price;
         this.category = category;
         this.available = available;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public MenuItem(String name, BigDecimal price, String category, Boolean available, String imageUrl) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.available = available;
+        this.imageUrl = imageUrl;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -97,6 +110,14 @@ public class MenuItem {
     
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
     
     @PrePersist

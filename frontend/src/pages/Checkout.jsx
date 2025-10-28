@@ -4,6 +4,8 @@ import { useCart } from '../contexts/CartContext';
 import { useAuth } from '../hooks/useAuth';
 import './Checkout.css';
 
+const formatPrice = (value) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(Number(value) || 0);
+
 const Checkout = () => {
   const navigate = useNavigate();
   const { cart, clearCart } = useCart();
@@ -259,8 +261,8 @@ const Checkout = () => {
                       <h4>{item.name}</h4>
                       <p>Quantity: {item.quantity}</p>
                     </div>
-                    <div className="item-price">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      <div className="item-price">
+                      {formatPrice(item.price * item.quantity)}
                     </div>
                   </div>
                 ))}
@@ -269,19 +271,19 @@ const Checkout = () => {
               <div className="order-totals">
                 <div className="total-row">
                   <span>Subtotal:</span>
-                  <span>${cart.totalAmount.toFixed(2)}</span>
+                  <span>{formatPrice(cart.totalAmount)}</span>
                 </div>
                 <div className="total-row">
                   <span>Delivery Fee:</span>
-                  <span>$3.99</span>
+                  <span>{formatPrice(3.99)}</span>
                 </div>
                 <div className="total-row">
                   <span>Tax:</span>
-                  <span>${(cart.totalAmount * 0.1).toFixed(2)}</span>
+                  <span>{formatPrice(cart.totalAmount * 0.1)}</span>
                 </div>
                 <div className="total-row final-total">
                   <span>Total:</span>
-                  <span>${(cart.totalAmount + 3.99 + cart.totalAmount * 0.1).toFixed(2)}</span>
+                  <span>{formatPrice(cart.totalAmount + 3.99 + cart.totalAmount * 0.1)}</span>
                 </div>
               </div>
             </div>

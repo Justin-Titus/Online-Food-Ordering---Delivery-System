@@ -2,6 +2,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import './OrderConfirmation.css';
 
+const formatPrice = (value) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(Number(value) || 0);
+
 const OrderConfirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -80,7 +82,7 @@ const OrderConfirmation = () => {
                     <p>Quantity: {item.quantity}</p>
                   </div>
                   <div className="item-total">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    {formatPrice(item.price * item.quantity)}
                   </div>
                 </div>
               ))}
@@ -91,19 +93,19 @@ const OrderConfirmation = () => {
             <h3>Order Summary</h3>
             <div className="summary-row">
               <span>Subtotal:</span>
-              <span>${orderData.totalAmount.toFixed(2)}</span>
+              <span>{formatPrice(orderData.totalAmount)}</span>
             </div>
             <div className="summary-row">
               <span>Delivery Fee:</span>
-              <span>$3.99</span>
+              <span>{formatPrice(3.99)}</span>
             </div>
             <div className="summary-row">
               <span>Tax:</span>
-              <span>${(orderData.totalAmount * 0.1).toFixed(2)}</span>
+              <span>{formatPrice(orderData.totalAmount * 0.1)}</span>
             </div>
             <div className="summary-row total">
               <span>Total Paid:</span>
-              <span>${totalWithExtras.toFixed(2)}</span>
+              <span>{formatPrice(totalWithExtras)}</span>
             </div>
           </div>
 

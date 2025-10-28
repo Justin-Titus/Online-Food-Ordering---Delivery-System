@@ -53,7 +53,7 @@
   align-items: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid #e74c3c;
+  border-bottom: 2px solid var(--primary);
 }
 
 .order-header h2 {
@@ -62,7 +62,7 @@
 }
 
 .order-number {
-  background: #e74c3c;
+  background: var(--primary);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -96,7 +96,7 @@
   background: #f8f9fa;
   padding: 1rem;
   border-radius: 8px;
-  border-left: 4px solid #e74c3c;
+  border-left: 4px solid var(--primary);
 }
 
 .info-item strong {
@@ -141,7 +141,7 @@
 
 .item-total {
   font-weight: 600;
-  color: #e74c3c;
+  color: var(--primary);
   font-size: 1.1rem;
 }
 
@@ -161,7 +161,7 @@
 .summary-row.total {
   font-weight: 700;
   font-size: 1.2rem;
-  color: #e74c3c;
+  color: var(--primary);
   border-top: 2px solid #ddd;
   padding-top: 0.5rem;
   margin-top: 1rem;
@@ -207,7 +207,7 @@
 .step-number {
   width: 40px;
   height: 40px;
-  background: #e74c3c;
+  background: var(--primary);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -251,12 +251,12 @@
 }
 
 .btn-primary {
-  background-color: #e74c3c;
+  background-color: var(--primary);
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #c0392b;
+  background-color: var(--primary-dark);
   transform: translateY(-2px);
 }
 
